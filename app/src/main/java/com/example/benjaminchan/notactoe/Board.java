@@ -82,7 +82,7 @@ public class Board {
     }
 
     public void addX(int x, int y) {
-        if (x >= 0 && y >= 0 && x < size && y < size) {
+        if (x >= 0 && y >= 0 && x <= size && y <= size) {
             board[x - 1][y - 1] = 1;
         }
     }
