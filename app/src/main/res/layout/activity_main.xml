@@ -36,7 +36,6 @@
         android:layout_height="120dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="36dp"
-        android:layout_marginBottom="4dp"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toStartOf="@+id/button2"
@@ -59,9 +58,9 @@
         android:id="@+id/button3"
         android:layout_width="121dp"
         android:layout_height="120dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="5dp"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,8 +94,8 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="121dp"
-        android:layout_height="120dp"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="4dp"
@@ -143,5 +142,74 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <!--<LineHor
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LineVer
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LineVer
+        android:id="@+id/lineVer2"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="parent" /> -->
+
+    <View
+        android:layout_width="400dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button4" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="400dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button7" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="400dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="2dp"
+        android:layout_height="400dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

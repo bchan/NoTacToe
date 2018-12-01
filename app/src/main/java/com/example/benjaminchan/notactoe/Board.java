@@ -3,9 +3,11 @@ package com.example.benjaminchan.notactoe;
 public class Board {
     private int board[][];
     private int size;
+    private boolean turn;
 
     public Board(int size) {
         this.size = size;
+        this.turn = true;
         board = new int[size][size];
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -16,12 +18,23 @@ public class Board {
 
     public Board() {
         this.size = 3;
+        this.turn = true;
         board = new int[size][size];
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 board[i][j] = 0;
             }
         }
+    }
+
+    public boolean checkTurns() {
+        if (!turn) {
+            turn = true;
+        }
+        else if (turn) {
+            turn = false;
+        }
+        return turn;
     }
 
     private boolean checkRows() {
@@ -40,6 +53,16 @@ public class Board {
             }
         }
         return false;
+    }
+
+    public void reset(int size) {
+        this.size = size;
+        board = new int[size][size];
+        for(int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                board[i][j] = 0;
+            }
+        }
     }
 
     private boolean checkColumns() {
