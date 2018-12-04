@@ -1,5 +1,6 @@
 package com.example.benjaminchan.notactoe;
 
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,8 +11,13 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.content.Context;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener{
+public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener {
 
     private TextView mTextMessage;
     private Button button1;
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     // Board
     Board b = new Board();
+
+    private SensorManager mSensorManager;
+    private Sensor mLight;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
 
     @Override
@@ -167,6 +179,33 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         }
 
 
+    }
+
+    // From https://developer.android.com/guide/topics/sensors/sensors_environment#java
+    @Override
+    public final void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do something here if sensor accuracy changes.
+    }
+
+    @Override
+    public final void onSensorChanged(SensorEvent event) {
+        float luxValue = event.values[0];
+        mTextMessage.setText(Float.toString(luxValue));
+        // Do something with this sensor data.
+    }
+
+    @Override
+    protected void onResume() {
+        // Register a listener for the sensor.
+        super.onResume();
+        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        // Be sure to unregister the sensor when the activity pauses.
+        super.onPause();
+        mSensorManager.unregisterListener(this);
     }
 
 }
