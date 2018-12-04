@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
-        mTextMessage.setText(Float.toString(luxValue));
+        //mTextMessage.setText(Float.toString(luxValue));
         // Do something with this sensor data.
     }
 
