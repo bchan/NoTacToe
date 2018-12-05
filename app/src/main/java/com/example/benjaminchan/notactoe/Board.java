@@ -44,7 +44,7 @@ public class Board {
                 for (int j = 0; j < size; j++) {
                     if (board[i][j] == 1) {
                         counter++;
-                        if (counter > 2) {
+                        if (counter > size - 1) {
                             return true;
                         }
                     }
@@ -53,16 +53,6 @@ public class Board {
             }
         }
         return false;
-    }
-
-    public void reset(int size) {
-        this.size = size;
-        board = new int[size][size];
-        for(int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                board[i][j] = 0;
-            }
-        }
     }
 
     private boolean checkColumns() {
@@ -72,7 +62,7 @@ public class Board {
                 for (int j = 0; j < size; j++) {
                     if (board[j][i] == 1) {
                         counter++;
-                        if (counter > 2) {
+                        if (counter > size - 1) {
                             return true;
                         }
                     }
@@ -81,6 +71,16 @@ public class Board {
             }
         }
         return false;
+    }
+    
+    public void reset(int size) {
+        this.size = size;
+        board = new int[size][size];
+        for(int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                board[i][j] = 0;
+            }
+        }
     }
 
     private boolean checkDiagonals() {
@@ -95,9 +95,34 @@ public class Board {
         }
         return false;
     }
+    
+    private boolean checkDiagonals5X5() {
+        if (board[0][0] == 1 &&
+                board[1][1] == 1 &&
+                board[2][2] == 1 &&
+                board[3][3] == 1 &&
+                board[4][4] == 1) {
+            return true;   
+        } else if (board[4][0] == 1 &&
+                   board[3][1] == 1 &&
+                   board[2][2] == 1 &&
+                   board[1][3] == 1 &&
+                   board[0][4] == 1)
+            return true;
+        }
+        return false;
+    }
 
     public boolean checkThree() {
         if (checkRows() || checkColumns() || checkDiagonals()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkFive() {
+        if (checkRows() || checkColumns() || checkDiagonals5X5()) {
             return true;
         } else {
             return false;
