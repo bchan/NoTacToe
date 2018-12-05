@@ -107,7 +107,7 @@ public class Board {
                    board[3][1] == 1 &&
                    board[2][2] == 1 &&
                    board[1][3] == 1 &&
-                   board[0][4] == 1)
+                   board[0][4] == 1) {
             return true;
         }
         return false;

@@ -4,8 +4,10 @@ import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
@@ -16,6 +18,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.content.Context;
+
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener {
 
@@ -190,6 +193,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
+
+        if (luxValue > 1) {
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.frame);
+            //rl.setBackgroundColor(Color.GRAY);
+            rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeBackground));
+        }
+
+        //if (luxValue > 100000) {
         //mTextMessage.setText(Float.toString(luxValue));
         // Do something with this sensor data.
     }
