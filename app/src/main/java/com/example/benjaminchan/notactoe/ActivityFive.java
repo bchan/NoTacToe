@@ -48,6 +48,14 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     private ImageButton button25;
     private Button resetbutton;
     private Button homebutton;
+    private View line1;
+    private View line2;
+    private View line3;
+    private View line4;
+    private View line5;
+    private View line6;
+    private View line7;
+    private View line8;
 
     // Board
     Board b = new Board(5);
@@ -88,6 +96,15 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button25 = (ImageButton) findViewById(R.id.button25);
         resetbutton = (Button) findViewById(R.id.resetbutton);
         homebutton = (Button) findViewById(R.id.homebutton);
+        line1 = (View) findViewById(R.id.line1);
+        line2 = (View) findViewById(R.id.line2);
+        line3 = (View) findViewById(R.id.line3);
+        line4 = (View) findViewById(R.id.line4);
+        line5 = (View) findViewById(R.id.line5);
+        line6 = (View) findViewById(R.id.line6);
+        line7 = (View) findViewById(R.id.line7);
+        line8 = (View) findViewById(R.id.line8);
+
         //visibility
         button1.setBackgroundColor(Color.TRANSPARENT);
         button2.setBackgroundColor(Color.TRANSPARENT);
@@ -173,7 +190,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         homebutton.setOnClickListener(this);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        mTextMessage.setTextColor(Color.BLUE);
+        mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -234,7 +251,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button25.setImageResource(android.R.color.transparent);
 
         mTextMessage.setText("Player 1's Turn");
-        mTextMessage.setTextColor(Color.BLUE);
+        mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
     }
 
@@ -381,10 +398,10 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         b.changeTurn();
         if (b.checkTurns()) {
             mTextMessage.setText("Player 1's Turn");
-            mTextMessage.setTextColor(Color.BLUE);
+            mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
         } else {
             mTextMessage.setText("Player 2's Turn");
-            mTextMessage.setTextColor(Color.GREEN);
+            mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.greenText));
         }
 
         if(b.checkFive())
@@ -439,16 +456,27 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.frame);
-        if (luxValue > 100) {
-
-            //rl.setBackgroundColor(Color.GRAY);
+        if (luxValue < 40) {
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeBackground));
+            line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line3.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line4.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line6.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line7.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line8.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
         } else {
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line1.setBackgroundColor(Color.BLACK);
+            line2.setBackgroundColor(Color.BLACK);
+            line3.setBackgroundColor(Color.BLACK);
+            line4.setBackgroundColor(Color.BLACK);
+            line5.setBackgroundColor(Color.BLACK);
+            line6.setBackgroundColor(Color.BLACK);
+            line7.setBackgroundColor(Color.BLACK);
+            line8.setBackgroundColor(Color.BLACK);
         }
-
-        //if (luxValue > 100000) {
-        //mTextMessage.setText(Float.toString(luxValue));
     }
 
     @Override

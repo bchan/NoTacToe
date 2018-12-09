@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private ImageButton button9;
     private Button resetbutton;
     private Button homebutton;
+    private View line1;
+    private View line2;
+    private View line3;
+    private View line4;
 
     // Board
     Board b = new Board();
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button9 = (ImageButton) findViewById(R.id.button9);
         resetbutton = (Button) findViewById(R.id.resetbutton);
         homebutton = (Button) findViewById(R.id.homebutton);
+        line1 = (View) findViewById(R.id.line1);
+        line2 = (View) findViewById(R.id.line2);
+        line3 = (View) findViewById(R.id.line3);
+        line4 = (View) findViewById(R.id.line4);
 
         //visibility
         button1.setBackgroundColor(Color.TRANSPARENT);
@@ -100,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         homebutton.setOnClickListener(this);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        mTextMessage.setTextColor(Color.BLUE);
+        mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -129,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button9.setImageResource(android.R.color.transparent);
 
         mTextMessage.setText("Player 1's Turn");
-        mTextMessage.setTextColor(Color.BLUE);
+        mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
     }
 
@@ -196,10 +204,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         b.changeTurn();
         if (b.checkTurns()) {
             mTextMessage.setText("Player 1's Turn");
-            mTextMessage.setTextColor(Color.BLUE);
+            mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
         } else {
             mTextMessage.setText("Player 2's Turn");
-            mTextMessage.setTextColor(Color.GREEN);
+            mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.greenText));
         }
 
         if(b.checkThree())
@@ -252,16 +260,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.frame);
-        if (luxValue > 100) {
-
-            //rl.setBackgroundColor(Color.GRAY);
+        if (luxValue < 40) {
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeBackground));
+            line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line3.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line4.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
         } else {
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
+            line1.setBackgroundColor(Color.BLACK);
+            line2.setBackgroundColor(Color.BLACK);
+            line3.setBackgroundColor(Color.BLACK);
+            line4.setBackgroundColor(Color.BLACK);
         }
-
-        //if (luxValue > 100000) {
-        //mTextMessage.setText(Float.toString(luxValue));
     }
 
     @Override
