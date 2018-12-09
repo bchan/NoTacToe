@@ -28,13 +28,17 @@ public class Board {
     }
 
     public boolean checkTurns() {
+        //turn == true is true, player 1's turn
+        return turn;
+    }
+
+    public void changeTurn(){
         if (!turn) {
             turn = true;
         }
         else if (turn) {
             turn = false;
         }
-        return turn;
     }
 
     private boolean checkRows() {
@@ -76,6 +80,7 @@ public class Board {
     public void reset(int size) {
         this.size = size;
         board = new int[size][size];
+        turn=true;
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 board[i][j] = 0;

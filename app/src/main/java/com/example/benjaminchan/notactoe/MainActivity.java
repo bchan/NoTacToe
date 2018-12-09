@@ -19,6 +19,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.content.Context;
+import android.support.v7.app.ActionBar;
+import android.content.Intent;
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private ImageButton button8;
     private ImageButton button9;
     private Button resetbutton;
+    private Button homebutton;
 
     // Board
     Board b = new Board();
@@ -41,31 +44,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private SensorManager mSensorManager;
     private Sensor mLight;
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-//        @Override
-//
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_home:
-//                    mTextMessage.setText(R.string.title_home);
-//                    return true;
-//                case R.id.navigation_dashboard:
-//                    mTextMessage.setText(R.string.title_dashboard);
-//                    return true;
-//                case R.id.navigation_notifications:
-//                    mTextMessage.setText(R.string.title_notifications);
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         button1 = (ImageButton) findViewById(R.id.button1);
         button2 = (ImageButton) findViewById(R.id.button2);
@@ -77,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button8 = (ImageButton) findViewById(R.id.button8);
         button9 = (ImageButton) findViewById(R.id.button9);
         resetbutton = (Button) findViewById(R.id.resetbutton);
+        homebutton = (Button) findViewById(R.id.homebutton);
+
         //visibility
         button1.setBackgroundColor(Color.TRANSPARENT);
         button2.setBackgroundColor(Color.TRANSPARENT);
@@ -110,20 +97,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button8.setOnClickListener(this);
         button9.setOnClickListener(this);
         resetbutton.setOnClickListener(this);
-
-//        button1.setText(" ");
-//        button2.setText(" ");
-//        button3.setText(" ");
-//        button4.setText(" ");
-//        button5.setText(" ");
-//        button6.setText(" ");
-//        button7.setText(" ");
-//        button8.setText(" ");
-//        button9.setText(" ");
+        homebutton.setOnClickListener(this);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mTextMessage.setTextColor(Color.BLUE);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -152,73 +129,89 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button9.setImageResource(android.R.color.transparent);
 
         mTextMessage.setText("Player 1's Turn");
+        mTextMessage.setTextColor(Color.BLUE);
 
     }
 
     @Override
     public void onClick(View v) {
 
-        if (b.checkTurns()) {
-            mTextMessage.setText("Player 1's Turn");
-        } else {
-            mTextMessage.setText("Player 2's Turn");
-        }
+
 
         switch (v.getId()) {
             case R.id.button1:
                 b.addX(1, 1);
-                //button1.setText("X");
                 button1.setImageResource(R.drawable.ximage);
+                button1.setEnabled(false);
                 break;
             case R.id.button2:
                 b.addX(1, 2);
-                //button2.setText("X");
                 button2.setImageResource(R.drawable.ximage);
+                button2.setEnabled(false);
                 break;
             case R.id.button3:
                 b.addX(1, 3);
-                //button3.setText("X");
                 button3.setImageResource(R.drawable.ximage);
+                button3.setEnabled(false);
                 break;
             case R.id.button4:
                 b.addX(2, 1);
-                //button4.setText("X");
                 button4.setImageResource(R.drawable.ximage);
+                button4.setEnabled(false);
                 break;
             case R.id.button5:
                 b.addX(2, 2);
-                //button5.setText("X");
                 button5.setImageResource(R.drawable.ximage);
+                button5.setEnabled(false);
                 break;
             case R.id.button6:
                 b.addX(2, 3);
-                //button6.setText("X");
                 button6.setImageResource(R.drawable.ximage);
+                button6.setEnabled(false);
                 break;
             case R.id.button7:
                 b.addX(3, 1);
-                //button7.setText("X");
                 button7.setImageResource(R.drawable.ximage);
+                button7.setEnabled(false);
                 break;
             case R.id.button8:
                 b.addX(3, 2);
-                //button8.setText("X");
                 button8.setImageResource(R.drawable.ximage);
+                button8.setEnabled(false);
                 break;
             case R.id.button9:
                 b.addX(3, 3);
-                //button9.setText("X");
                 button9.setImageResource(R.drawable.ximage);
+                button9.setEnabled(false);
                 break;
             case R.id.resetbutton:
                 resetBoard();
-                break;
+                return;
+            case R.id.homebutton:
+                Intent home = new Intent(this, LaunchActivity.class);
+                startActivity(home);
+                return;
         }
 
+        b.changeTurn();
+        if (b.checkTurns()) {
+            mTextMessage.setText("Player 1's Turn");
+            mTextMessage.setTextColor(Color.BLUE);
+        } else {
+            mTextMessage.setText("Player 2's Turn");
+            mTextMessage.setTextColor(Color.GREEN);
+        }
 
         if(b.checkThree())
         {
-            mTextMessage.setText("You lose!");
+            if(b.checkTurns())
+            {
+                mTextMessage.setText("Player 1 wins!");
+            }
+            else
+            {
+                mTextMessage.setText("Player 2 wins!");
+            }
             button1.setEnabled(false);
             button2.setEnabled(false);
             button3.setEnabled(false);

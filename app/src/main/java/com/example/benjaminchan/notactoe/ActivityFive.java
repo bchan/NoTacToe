@@ -1,6 +1,7 @@
 package com.example.benjaminchan.notactoe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -46,6 +47,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     private ImageButton button24;
     private ImageButton button25;
     private Button resetbutton;
+    private Button homebutton;
 
     // Board
     Board b = new Board(5);
@@ -85,6 +87,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button24 = (ImageButton) findViewById(R.id.button24);
         button25 = (ImageButton) findViewById(R.id.button25);
         resetbutton = (Button) findViewById(R.id.resetbutton);
+        homebutton = (Button) findViewById(R.id.homebutton);
         //visibility
         button1.setBackgroundColor(Color.TRANSPARENT);
         button2.setBackgroundColor(Color.TRANSPARENT);
@@ -167,8 +170,10 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button24.setOnClickListener(this);
         button25.setOnClickListener(this);
         resetbutton.setOnClickListener(this);
+        homebutton.setOnClickListener(this);
 
         mTextMessage = (TextView) findViewById(R.id.message);
+        mTextMessage.setTextColor(Color.BLUE);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -229,136 +234,169 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button25.setImageResource(android.R.color.transparent);
 
         mTextMessage.setText("Player 1's Turn");
+        mTextMessage.setTextColor(Color.BLUE);
 
     }
 
     @Override
     public void onClick(View v) {
 
-        if (b.checkTurns()) {
-            mTextMessage.setText("Player 1's Turn");
-        } else {
-            mTextMessage.setText("Player 2's Turn");
-        }
 
         switch (v.getId()) {
             case R.id.button1:
                 b.addX(1, 1);
-                //button1.setText("X");
                 button1.setImageResource(R.drawable.ximagefive);
+                button1.setEnabled(false);
                 break;
             case R.id.button2:
                 b.addX(1, 2);
-                //button2.setText("X");
                 button2.setImageResource(R.drawable.ximagefive);
+                button2.setEnabled(false);
                 break;
             case R.id.button3:
                 b.addX(1, 3);
                 button3.setImageResource(R.drawable.ximagefive);
+                button3.setEnabled(false);
                 break;
             case R.id.button4:
                 b.addX(1, 4);
-                //button4.setText("X");
                 button4.setImageResource(R.drawable.ximagefive);
+                button4.setEnabled(false);
                 break;
             case R.id.button5:
                 b.addX(1, 5);
-                //button5.setText("X");
                 button5.setImageResource(R.drawable.ximagefive);
+                button5.setEnabled(false);
                 break;
             case R.id.button6:
                 b.addX(2, 1);
-                //button6.setText("X");
                 button6.setImageResource(R.drawable.ximagefive);
+                button6.setEnabled(false);
                 break;
             case R.id.button7:
                 b.addX(2, 2);
-                //button7.setText("X");
                 button7.setImageResource(R.drawable.ximagefive);
+                button7.setEnabled(false);
                 break;
             case R.id.button8:
                 b.addX(2, 3);
-                //button8.setText("X");
                 button8.setImageResource(R.drawable.ximagefive);
+                button8.setEnabled(false);
                 break;
             case R.id.button9:
                 b.addX(2, 4);
                 button9.setImageResource(R.drawable.ximagefive);
+                button9.setEnabled(false);
                 break;
             case R.id.button10:
                 b.addX(2, 5);
                 button10.setImageResource(R.drawable.ximagefive);
+                button10.setEnabled(false);
                 break;
             case R.id.button11:
                 b.addX(3, 1);
                 button11.setImageResource(R.drawable.ximagefive);
+                button11.setEnabled(false);
                 break;
             case R.id.button12:
                 b.addX(3, 2);
                 button12.setImageResource(R.drawable.ximagefive);
+                button12.setEnabled(false);
                 break;
             case R.id.button13:
                 b.addX(3, 3);
                 button13.setImageResource(R.drawable.ximagefive);
+                button13.setEnabled(false);
                 break;
             case R.id.button14:
                 b.addX(3, 4);
                 button14.setImageResource(R.drawable.ximagefive);
+                button14.setEnabled(false);
                 break;
             case R.id.button15:
                 b.addX(3, 5);
                 button15.setImageResource(R.drawable.ximagefive);
+                button15.setEnabled(false);
                 break;
             case R.id.button16:
                 b.addX(4, 1);
                 button16.setImageResource(R.drawable.ximagefive);
+                button16.setEnabled(false);
                 break;
             case R.id.button17:
                 b.addX(4, 2);
                 button17.setImageResource(R.drawable.ximagefive);
+                button17.setEnabled(false);
                 break;
             case R.id.button18:
                 b.addX(4, 3);
                 button18.setImageResource(R.drawable.ximagefive);
+                button18.setEnabled(false);
                 break;
             case R.id.button19:
                 b.addX(4, 4);
                 button19.setImageResource(R.drawable.ximagefive);
+                button19.setEnabled(false);
                 break;
             case R.id.button20:
                 b.addX(4, 5);
                 button20.setImageResource(R.drawable.ximagefive);
+                button20.setEnabled(false);
                 break;
             case R.id.button21:
                 b.addX(5, 1);
                 button21.setImageResource(R.drawable.ximagefive);
+                button21.setEnabled(false);
                 break;
             case R.id.button22:
                 b.addX(5, 2);
                 button22.setImageResource(R.drawable.ximagefive);
+                button22.setEnabled(false);
                 break;
             case R.id.button23:
                 b.addX(5, 3);
                 button23.setImageResource(R.drawable.ximagefive);
+                button23.setEnabled(false);
                 break;
             case R.id.button24:
                 b.addX(5, 4);
                 button24.setImageResource(R.drawable.ximagefive);
+                button24.setEnabled(false);
                 break;
             case R.id.button25:
                 b.addX(5, 5);
                 button25.setImageResource(R.drawable.ximagefive);
+                button25.setEnabled(false);
                 break;
 
             case R.id.resetbutton:
                 resetBoard();
-                break;
+                return;
+            case R.id.homebutton:
+                Intent home = new Intent(this, LaunchActivity.class);
+                startActivity(home);
+                return;
         }
 
+        b.changeTurn();
+        if (b.checkTurns()) {
+            mTextMessage.setText("Player 1's Turn");
+            mTextMessage.setTextColor(Color.BLUE);
+        } else {
+            mTextMessage.setText("Player 2's Turn");
+            mTextMessage.setTextColor(Color.GREEN);
+        }
 
         if(b.checkFive())
         {
-            mTextMessage.setText("You lose!");
+            if(b.checkTurns())
+            {
+                mTextMessage.setText("Player 1 wins!");
+            }
+            else
+            {
+                mTextMessage.setText("Player 2 wins!");
+            }
             button1.setEnabled(false);
             button2.setEnabled(false);
             button3.setEnabled(false);
