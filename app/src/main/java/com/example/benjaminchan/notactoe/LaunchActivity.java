@@ -35,8 +35,12 @@ public class LaunchActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.button1:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.button2:
+                Intent intent2 = new Intent(this, ActivityFive.class);
+                startActivity(intent2);
                 break;
         }
     }

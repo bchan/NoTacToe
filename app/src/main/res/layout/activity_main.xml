@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@android:style/Theme.NoTitleBar"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -220,6 +221,8 @@
         android:layout_width="331dp"
         android:layout_height="48dp"
         android:text="@string/title_home"
+        android:textAlignment="center"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frame"
         app:layout_constraintStart_toEndOf="@+id/frame"
