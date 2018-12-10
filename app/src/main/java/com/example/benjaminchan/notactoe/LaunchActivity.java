@@ -16,7 +16,8 @@ import android.content.Intent;
 
 
 public class LaunchActivity extends Activity implements OnClickListener, SensorEventListener {
-
+    //home screen buttons for 3 by 3 and 5 by 5
+    //lightsensor to also change the background color of homescreen
     private Button button1;
     private Button button2;
     private RelativeLayout rl;
@@ -39,7 +40,7 @@ public class LaunchActivity extends Activity implements OnClickListener, SensorE
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
 
-
+    //button1 is for 3 by 3 board, button2 is for 5 by 5 board
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -59,7 +60,8 @@ public class LaunchActivity extends Activity implements OnClickListener, SensorE
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // If sensor accuracy changes, do something.
     }
-
+    
+    //changing the background color by detecting the lux value
     @Override
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
@@ -69,7 +71,7 @@ public class LaunchActivity extends Activity implements OnClickListener, SensorE
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
         }
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
