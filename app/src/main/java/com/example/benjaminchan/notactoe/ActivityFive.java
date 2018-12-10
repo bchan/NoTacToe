@@ -9,7 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +19,7 @@ import android.view.View.OnClickListener;
 
 public class ActivityFive extends Activity implements OnClickListener, SensorEventListener {
 
+    //buttons on 5 by 5 board that user can press
     private TextView mTextMessage;
     private ImageButton button1;
     private ImageButton button2;
@@ -48,6 +48,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     private ImageButton button25;
     private Button resetbutton;
     private Button homebutton;
+    //grid lines for the board
     private View line1;
     private View line2;
     private View line3;
@@ -60,10 +61,13 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     // Board
     Board b = new Board(5);
 
+    //sensors that are needed to detect the light for background color change
     private SensorManager mSensorManager;
     private Sensor mLight;
 
 
+    //to display X image on the button that are pressed
+    //and setting the background transparent in the beginning
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +193,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         resetbutton.setOnClickListener(this);
         homebutton.setOnClickListener(this);
 
+        //set text color of Player 1 and 2
         mTextMessage = (TextView) findViewById(R.id.message);
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
@@ -257,8 +262,6 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
 
     @Override
     public void onClick(View v) {
-
-
         switch (v.getId()) {
             case R.id.button1:
                 b.addX(1, 1);

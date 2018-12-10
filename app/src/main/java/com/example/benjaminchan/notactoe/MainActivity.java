@@ -229,20 +229,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             button7.setEnabled(false);
             button8.setEnabled(false);
             button9.setEnabled(false);
-//            if (v.getId() == R.id.button5) {
-//                mTextMessage.setText("Player 1's Turn");
-//                button1.setText(" ");
-//                button2.setText(" ");
-//                button3.setText(" ");
-//                button4.setText(" ");
-//                button5.setText(" ");
-//                button6.setText(" ");
-//                button7.setText(" ");
-//                button8.setText(" ");
-//                button9.setText(" ");
-//
-//                b.reset(3);
-//            }
         }
 
 
