@@ -192,7 +192,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         resetbutton.setOnClickListener(this);
         homebutton.setOnClickListener(this);
 
-        //set text color of Player 1 and 2
+        //set starting text with player 1
         mTextMessage = (TextView) findViewById(R.id.message);
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
         
