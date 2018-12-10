@@ -21,7 +21,7 @@ import android.content.Intent;
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener {
-
+    //buttons for 3 by 3 board
     private TextView mTextMessage;
     private ImageButton button1;
     private ImageButton button2;
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private ImageButton button9;
     private Button resetbutton;
     private Button homebutton;
+    //grid lines on the board
     private View line1;
     private View line2;
     private View line3;
@@ -41,11 +42,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     // Board
     Board b = new Board();
-
+    //sensors detecting light to change the background colors
     private SensorManager mSensorManager;
     private Sensor mLight;
 
-
+    //setting the buttons empty and transparent and to be ready to take in user inputs
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,16 +104,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button9.setOnClickListener(this);
         resetbutton.setOnClickListener(this);
         homebutton.setOnClickListener(this);
-
+        //setting the first player 1 message
         mTextMessage = (TextView) findViewById(R.id.message);
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
-
+        //setting the light sensor for background color
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
-
+    //reset the board to empty state for a new game
     private void resetBoard() {
         b.reset(3);
+        //enabling buttons again that were disabled at the end of the previous game
         button1.setEnabled(true);
         button2.setEnabled(true);
         button3.setEnabled(true);
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button7.setEnabled(true);
         button8.setEnabled(true);
         button9.setEnabled(true);
-
+        //undisplaying X images that were on the board from the previous game
         button1.setImageResource(android.R.color.transparent);
         button2.setImageResource(android.R.color.transparent);
         button3.setImageResource(android.R.color.transparent);
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         button7.setImageResource(android.R.color.transparent);
         button8.setImageResource(android.R.color.transparent);
         button9.setImageResource(android.R.color.transparent);
-
+        //starting with Player 1 again
         mTextMessage.setText("Player 1's Turn");
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
@@ -140,9 +142,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     public void onClick(View v) {
-
-
-
+        //taking in user input
+        //display X where user has clicked
         switch (v.getId()) {
             case R.id.button1:
                 b.addX(1, 1);
@@ -189,16 +190,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 button9.setImageResource(R.drawable.ximage);
                 button9.setEnabled(false);
                 break;
+            //resetbutton and homebutton returns because they don't have to go to different players turn
+            //resets the whole board
             case R.id.resetbutton:
                 resetBoard();
                 return;
+            //go back to homescreen to change the board
             case R.id.homebutton:
                 Intent home = new Intent(this, LaunchActivity.class);
                 startActivity(home);
                 return;
         }
-
+        //change turn
         b.changeTurn();
+        //display if it's player 1 or 2's turn
         if (b.checkTurns()) {
             mTextMessage.setText("Player 1's Turn");
             mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
@@ -206,7 +211,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             mTextMessage.setText("Player 2's Turn");
             mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.greenText));
         }
-
+        //check if there is a winner
+        //display who wins using checkTurns() function
         if(b.checkThree())
         {
             if(b.checkTurns())
@@ -217,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             {
                 mTextMessage.setText("Player 2 wins!");
             }
+            //if there is a winner, disable all the buttons so that user can only press either resetbutton or homebutton
             button1.setEnabled(false);
             button2.setEnabled(false);
             button3.setEnabled(false);
@@ -236,17 +243,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         // If sensor accuracy changes, do something.
     }
 
+    //changing the background color based on detected lux value
     @Override
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.frame);
-        if (luxValue < 40) {
+        if (luxValue < 40) { //night mode
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeBackground));
             line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
             line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
             line3.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
             line4.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
-        } else {
+        } else { //day mode
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
             line1.setBackgroundColor(Color.BLACK);
             line2.setBackgroundColor(Color.BLACK);
@@ -254,13 +262,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             line4.setBackgroundColor(Color.BLACK);
         }
     }
-
+    //resume the light listener
     @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
+    //pause the light listener
     @Override
     protected void onPause() {
         super.onPause();
