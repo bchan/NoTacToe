@@ -136,7 +136,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button24.setBackgroundColor(Color.TRANSPARENT);
         button25.setBackgroundColor(Color.TRANSPARENT);
 
-
+        //no image in the beginning
         button1.setImageResource(android.R.color.transparent);
         button2.setImageResource(android.R.color.transparent);
         button3.setImageResource(android.R.color.transparent);
@@ -196,11 +196,12 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         //set text color of Player 1 and 2
         mTextMessage = (TextView) findViewById(R.id.message);
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
-
+        
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
-
+    
+    //function to reset the board when user presses reset button
     private void resetBoard() {
         b.reset(5);
         button1.setEnabled(true);
