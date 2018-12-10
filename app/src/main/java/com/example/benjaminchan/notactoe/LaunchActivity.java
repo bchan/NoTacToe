@@ -71,13 +71,13 @@ public class LaunchActivity extends Activity implements OnClickListener, SensorE
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
         }
     }
-    
+    //resuming the light sensor
     @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
+    //pausing the light sensor
     @Override
     protected void onPause() {
         super.onPause();
