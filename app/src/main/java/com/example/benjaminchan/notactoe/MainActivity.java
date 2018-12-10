@@ -2,11 +2,8 @@ package com.example.benjaminchan.notactoe;
 
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
@@ -230,16 +227,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             button8.setEnabled(false);
             button9.setEnabled(false);
         }
-
-
     }
-
 
 
     // From https://developer.android.com/guide/topics/sensors/sensors_environment#java
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do something here if sensor accuracy changes.
+        // If sensor accuracy changes, do something.
     }
 
     @Override
@@ -263,14 +257,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     protected void onResume() {
-        // Register a listener for the sensor.
         super.onResume();
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         mSensorManager.unregisterListener(this);
     }

@@ -452,7 +452,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     // From https://developer.android.com/guide/topics/sensors/sensors_environment#java
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do something here if sensor accuracy changes.
+        // If sensor accuracy changes, do something.
     }
 
     @Override
@@ -484,14 +484,12 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
 
     @Override
     protected void onResume() {
-        // Register a listener for the sensor.
         super.onResume();
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
