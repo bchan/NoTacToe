@@ -66,8 +66,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     private Sensor mLight;
 
 
-    //to display X image on the button that are pressed
-    //and setting the background transparent in the beginning
+    //to display X image on the button that are pressed, setting the background transparent in the beginning
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,6 +203,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     //function to reset the board when user presses reset button
     private void resetBoard() {
         b.reset(5);
+        //make the buttons enabled again after disabling them at the end of the game
         button1.setEnabled(true);
         button2.setEnabled(true);
         button3.setEnabled(true);
@@ -229,7 +229,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button23.setEnabled(true);
         button24.setEnabled(true);
         button25.setEnabled(true);
-
+        //empty the area where X was displayed
         button1.setImageResource(android.R.color.transparent);
         button2.setImageResource(android.R.color.transparent);
         button3.setImageResource(android.R.color.transparent);
@@ -255,12 +255,12 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
         button23.setImageResource(android.R.color.transparent);
         button24.setImageResource(android.R.color.transparent);
         button25.setImageResource(android.R.color.transparent);
-
+        //Start with Player 1 again
         mTextMessage.setText("Player 1's Turn");
         mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
 
     }
-
+    //Function that gets user input and displays X and disables the button that is already pressed
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -389,17 +389,20 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
                 button25.setImageResource(R.drawable.ximagefive);
                 button25.setEnabled(false);
                 break;
-
+            //resetbutton to reset the whole board
+            //return because we need to get out of the function, not go to player2's turn
             case R.id.resetbutton:
                 resetBoard();
                 return;
+            //homebutton that returns to home screen to change the board size
             case R.id.homebutton:
                 Intent home = new Intent(this, LaunchActivity.class);
                 startActivity(home);
                 return;
         }
-
+        //changing turns after pressed
         b.changeTurn();
+        //check turn to display if it is player 1 or 2 's turn
         if (b.checkTurns()) {
             mTextMessage.setText("Player 1's Turn");
             mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blueText));
@@ -407,7 +410,7 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
             mTextMessage.setText("Player 2's Turn");
             mTextMessage.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.greenText));
         }
-
+        //function that checks if there is a winner
         if(b.checkFive())
         {
             if(b.checkTurns())
@@ -418,6 +421,8 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
             {
                 mTextMessage.setText("Player 2 wins!");
             }
+            //if there is a winner all the buttons on the board should be disabled
+            //user can only press either resetbutton or homebutton
             button1.setEnabled(false);
             button2.setEnabled(false);
             button3.setEnabled(false);
@@ -455,11 +460,12 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // If sensor accuracy changes, do something.
     }
-
+    //Changing background color by sensing the lux value 
     @Override
     public final void onSensorChanged(SensorEvent event) {
         float luxValue = event.values[0];
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.frame);
+        //40 is a standard lux value for overcast weather
         if (luxValue < 40) {
             rl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeBackground));
             line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.darkThemeText));
@@ -482,13 +488,13 @@ public class ActivityFive extends Activity implements OnClickListener, SensorEve
             line8.setBackgroundColor(Color.BLACK);
         }
     }
-
+    //resuming the light listener
     @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
+    //pausing the light listener
     @Override
     protected void onPause() {
         super.onPause();
