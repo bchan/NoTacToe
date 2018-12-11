@@ -8,6 +8,4 @@ Instructions to run and play No-Tac-Toe
   or go back to the home screen to change the board size.
 6. Enjoy playing this game!
 
-To change into night mode (on the emulator): click the ... at the bottom of the settings bar, then Virtual Sensors ->
-Additional Sensors. If the lux level is below 40, then the app will change into night mode. If 40 lux or above, the app will
-be in day mode.
+To change into night mode (on the emulator): click the ... at the bottom of the settings bar, then Virtual Sensors -> Additional Sensors. If the lux level is below 40, then the app will change into night mode. If 40 lux or above, the app will be in day mode.
